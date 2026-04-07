@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shakthi Kumar Naik — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-main: #050505;
+    --bg-card: #111111;
+    --bg-card-hover: #1a1a1a;
+    --text-main: #f0f0f0;
+    --text-muted: #888888;
+    --cyan: #00E5FF;
+    --cyan-glow: rgba(0, 229, 255, 0.2);
+    --coral: #FF3366;
+    --coral-glow: rgba(255, 51, 102, 0.2);
+    --border: rgba(255, 255, 255, 0.1);
+    --radius: 12px;
+    --ff-head: 'Syne', sans-serif;
+    --ff-body: 'Space Mono', monospace;
+    --max-w: 1200px;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; background: var(--bg-main); color: var(--text-main); }
+  body { font-family: var(--ff-body); line-height: 1.6; overflow-x: hidden; }
+  
+  h1, h2, h3, h4, .logo { font-family: var(--ff-head); }
+  a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+  }
+  .nav-inner {
+    max-width: var(--max-w); margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; color: var(--text-main); }
+  .logo span { color: var(--cyan); }
+  nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+  nav ul a { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  nav ul a:hover { color: var(--cyan); }
+  .nav-cta {
+    border: 1px solid var(--cyan); color: var(--cyan) !important;
+    padding: 0.5rem 1rem; border-radius: 4px;
+    box-shadow: 0 0 10px var(--cyan-glow);
+  }
+  .nav-cta:hover { background: var(--cyan); color: var(--bg-main) !important; }
+
+  /* ── LAYOUT SHELL ── */
+  section { padding: 8rem 2rem 4rem; max-width: var(--max-w); margin: 0 auto; }
+  .section-label {
+    color: var(--cyan); font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 1rem; display: block;
+  }
+  .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 3rem; line-height: 1.1; }
+
+  /* ── HERO ── */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .hero-title { font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 1; margin-bottom: 2rem; letter-spacing: -2px; }
+  .hero-title .cyan { color: var(--cyan); text-shadow: 0 0 20px var(--cyan-glow); }
+  .hero-title .coral { color: var(--coral); text-shadow: 0 0 20px var(--coral-glow); }
+  
+  .hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; }
+  
+  .hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .stat-node {
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: var(--radius);
+    min-width: 200px; transition: transform 0.3s, border-color 0.3s;
+  }
+  .stat-node:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 10px 30px var(--cyan-glow); }
+  .stat-node h3 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 0.5rem; }
+  .stat-node p { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── ABOUT (BENTO BOX) ── */
+  .bento-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto); gap: 1.5rem;
+  }
+  .bento-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .bento-item:hover { border-color: var(--coral); box-shadow: 0 0 20px var(--coral-glow); }
+  .bento-large { grid-column: span 2; grid-row: span 2; }
+  .bento-large h3 { font-size: 2rem; margin-bottom: 1.5rem; }
+  .bento-large p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.05rem; }
+  .bento-large strong { color: var(--text-main); }
+  
+  .bento-small h4 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--cyan); }
+  .bento-small p { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* ── SKILLS MARQUEE ── */
+  #skills { padding: 4rem 0; max-width: 100%; border-y: 1px solid var(--border); background: var(--bg-card); overflow: hidden; }
+  .marquee-wrapper { display: flex; white-space: nowrap; }
+  .marquee-content {
+    display: flex; gap: 3rem; padding-right: 3rem;
+    animation: scrollText 20s infinite linear;
+  }
+  .skill-tag { font-size: 1.5rem; font-family: var(--ff-head); font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+  .skill-tag.hl-cyan { color: var(--cyan); }
+  .skill-tag.hl-coral { color: var(--coral); }
+  
+  @keyframes scrollText { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+  /* ── EXPERIENCE (LOG ENTRIES) ── */
+  .log-container { display: flex; flex-direction: column; gap: 2rem; }
+  .log-entry {
+    background: var(--bg-card); padding: 2rem; border-radius: var(--radius);
+    border-left: 4px solid var(--border); position: relative;
+    transition: all 0.3s ease;
+  }
+  .log-entry:hover { border-left-color: var(--cyan); background: var(--bg-card-hover); transform: translateX(10px); }
+  .log-entry.sec:hover { border-left-color: var(--coral); }
+  
+  .log-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+  .log-header h3 { font-size: 1.5rem; color: var(--text-main); }
+  .log-company { color: var(--cyan); font-weight: 700; font-family: var(--ff-body); }
+  .log-date { font-size: 0.9rem; color: var(--text-muted); }
+  
+  .log-entry ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .log-entry ul li { font-size: 0.95rem; color: var(--text-muted); padding-left: 1.5rem; position: relative; }
+  .log-entry ul li::before { content: '>'; position: absolute; left: 0; color: var(--cyan); font-weight: bold; }
+  .log-entry ul li strong { color: var(--text-main); }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+  .project-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    position: relative; display: flex; flex-direction: column;
+    text-decoration: none; transition: transform 0.3s;
+  }
+  .project-card:hover { transform: translateY(-10px); border-color: var(--cyan); }
+  
+  .project-visual {
+    height: 180px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .visual-ai { background: linear-gradient(45deg, #050505, #004d40, var(--cyan)); }
+  .visual-siem { background: linear-gradient(135deg, #050505, #4a0000, var(--coral)); }
+  .visual-bi { background: linear-gradient(to right, #050505, #002244, #00E5FF); }
+  
+  .project-visual::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .project-info { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+  .project-info h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+  .project-info p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; }
+  .tech-stack { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .tech-stack span { font-size: 0.75rem; padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 4px; color: var(--cyan); }
+  .project-link-indicator { font-size: 0.85rem; color: var(--text-main); font-weight: bold; text-transform: uppercase; }
+
+  /* ── CONTACT (TERMINAL) ── */
+  #contact { padding: 8rem 2rem; border-top: 1px solid var(--border); background: #000; text-align: center; }
+  .contact-title { font-size: clamp(2rem, 5vw, 4rem); font-family: var(--ff-head); font-weight: 800; margin-bottom: 4rem; }
+  
+  .contact-links { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
+  .terminal-link {
+    font-size: clamp(1.5rem, 3vw, 2.5rem); font-family: var(--ff-head); font-weight: 700;
+    color: var(--text-muted); position: relative; padding: 0.5rem 1rem;
+  }
+  .terminal-link::before {
+    content: '→'; position: absolute; left: -2rem; color: var(--cyan);
+    opacity: 0; transform: translateX(-10px); transition: all 0.3s;
+  }
+  .terminal-link:hover { color: var(--text-main); }
+  .terminal-link:hover::before { opacity: 1; transform: translateX(0); }
+  .terminal-link.hl-coral:hover::before { color: var(--coral); }
+
+  footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--text-muted); background: #000; }
+
+  /* ── RESUME BUTTON ── */
+  .resume-download-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: transparent; border: 2px solid var(--cyan);
+    color: var(--cyan) !important; font-family: var(--ff-body);
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 0.9rem 1.8rem;
+    border-radius: 6px; cursor: pointer; text-decoration: none;
+    box-shadow: 0 0 15px var(--cyan-glow);
+    transition: all 0.3s ease; position: relative; overflow: hidden;
+  }
+  .resume-download-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--cyan); transform: translateX(-100%);
+    transition: transform 0.3s ease; z-index: 0;
+  }
+  .resume-download-btn:hover::before { transform: translateX(0); }
+  .resume-download-btn:hover { color: var(--bg-main) !important; box-shadow: 0 0 30px var(--cyan-glow); }
+  .resume-download-btn span, .resume-download-btn svg { position: relative; z-index: 1; }
+
+  /* ── HAMBURGER MENU ── */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center;
+    gap: 5px; cursor: pointer; padding: 0.4rem;
+    background: none; border: none; z-index: 1100;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--text-main); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE NAV DRAWER ── */
+  .mobile-nav {
+    display: none; position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(5,5,5,0.98); backdrop-filter: blur(20px);
+    z-index: 999; padding: 6rem 2rem 3rem;
+    flex-direction: column; align-items: center; gap: 2rem;
+    border-bottom: 1px solid var(--border);
+    transform: translateY(-100%); transition: transform 0.4s ease;
+  }
+  .mobile-nav.open { transform: translateY(0); }
+  .mobile-nav a {
+    font-family: var(--ff-head); font-size: 1.8rem; font-weight: 700;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;
+    transition: color 0.3s;
+  }
+  .mobile-nav a:hover { color: var(--cyan); }
+  .mobile-nav .resume-download-btn { font-size: 1rem; margin-top: 1rem; }
+
+  /* ── RESPONSIVE BREAKPOINTS ── */
+  @media (max-width: 900px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-large { grid-column: span 1; grid-row: span 1; }
+    nav ul { display: none; }
+    .hamburger { display: flex; }
+    .mobile-nav { display: flex; }
+    .hero-stats { gap: 1rem; }
+    .stat-node { min-width: 140px; padding: 1rem; }
+    .stat-node h3 { font-size: 2rem; }
+    .hero-resume-wrap { margin-top: 0.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem; }
+    section { padding: 6rem 1.2rem 3rem; }
+    .hero-title { letter-spacing: -1px; }
+    .hero-stats { flex-direction: column; gap: 0.8rem; }
+    .stat-node { min-width: unset; width: 100%; }
+    .log-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .terminal-link { font-size: clamp(1.1rem, 5vw, 1.8rem); }
+    .terminal-link::before { display: none; }
+    .section-title { font-size: 2.2rem; }
+    .contact-title { font-size: clamp(1.8rem, 6vw, 3rem); }
+    .resume-download-btn { width: 100%; justify-content: center; }
+  }
+
+  @media (max-width: 400px) {
+    .logo { font-size: 1.2rem; }
+    .section-title { font-size: 1.8rem; }
+    .bento-large h3 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile nav drawer -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="https://drive.google.com/file/d/1zC5KenME2uXkjDeetkvHVUw78qsXW-dR/view?usp=sharing"
+download="Shakthi_Kumar_Naik_Resume.pdf" class="resume-download-btn" style="margin-top: 2rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+    </svg>
+    <span>Download Resume</span>
+  </a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="logo">Shakthi<span>Kumar<span>Naik</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+       <a href="https://drive.google.com/file/d/1zC5KenME2uXkjDeetkvHVUw78qsXW-dR/view?usp=sharing"
+download="Shakthi_Kumar_Naik_Resume.pdf" class="nav-cta">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+          </svg>
+          <span>Download Resume</span>
+        </a>
+      </li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section id="hero">
+  <h1 class="hero-title">Turning data into <span class="cyan">clarity</span><br/>and threats into <span class="coral">intelligence.</span></h1>
+  <p class="hero-sub">Analytics & Security Analyst specializing in Power BI, SQL, Python, and Azure. Building dashboards that decision-makers trust and SIEM environments that defenders rely on.</p>
+  
+  <div class="hero-resume-wrap" style="margin-bottom: 2.5rem;">
+    <a href="https://drive.google.com/file/d/1zC5KenME2uXkjDeetkvHVUw78qsXW-dR/view?usp=sharing"
+download="Shakthi_Kumar_Naik_Resume.pdf" class="resume-download-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+      </svg>
+      <span>Download Resume</span>
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-node">
+      <h3>2+</h3>
+      <p>Years of Experience</p>
+    </div>
+    <div class="stat-node">
+      <h3 style="color: var(--cyan);">20%</h3>
+      <p>Operational Cost Reduction</p>
+    </div>
+     <div class="stat-node">
+      <h3 style="color: var(--coral);">50%</h3>
+      <p>Productivity Insight Boost</p>
+      </div>
+    <div class="stat-node">
+      <h3 style="color: var(--coral);">2</h3>
+      <p>Industries served</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <span class="section-label">About Me </span>
+  <h2 class="section-title">A Data Mind with a<br>Security Instinct.</h2>
+  
+  <div class="bento-grid">
+    <div class="bento-item bento-large">
+      <h3>Shakthi Kumar Naik</h3>
+      <p>I am a passionate <strong>Analyst</strong> and <strong>SIEM Monitoring Specialist</strong> dedicated to transforming complex information into strategic insights. With a solid professional foundation built at organizations like <strong>Atos India</strong> and <strong>Covance</strong>, I specialize in bridging the gap between data-driven decision-making and robust cybersecurity monitoring.</p>
+      <p>My journey has been driven by a relentless curiosity and a commitment to continuous learning, allowing me to adapt and thrive in the ever-evolving landscape of data analytics and cybersecurity.</p>
+
+    </div>
+    <div class="bento-item bento-small">
+      <h4>Data Analytics & BI</h4>
+      <p>Designing Power BI dashboards, ETL pipelines, and data models that give leadership real-time clarity.</p>
+    </div>
+    
+    <div class="bento-item bento-small" style="border-top-color: var(--coral);">
+      <h4 style="color: var(--coral);">Security & SIEM</h4>
+      <p>Building Elastic SIEM labs, generating security events, and monitoring for anomalies.</p>
+    </div>
+  </div>
+</section>
+
+<div id="skills">
+  <div class="marquee-wrapper">
+    <div class="marquee-content">
+      <span class="skill-tag hl-cyan">Python</span>
+      <span class="skill-tag">SQL</span>
+      <span class="skill-tag hl-coral">Elastic SIEM</span>
+      <span class="skill-tag">Tableau</span>
+      <span class="skill-tag hl-cyan">Power BI</span>
+      <span class="skill-tag">Azure</span>
+      <span class="skill-tag hl-coral">Log Analysis</span>
+      <span class="skill-tag">Snowflake</span>
+      <span class="skill-tag">AWS</span>
+    </div>
+    <div class="marquee-content">
+      <span class="skill-tag hl-cyan">Python</span>
+      <span class="skill-tag">SQL</span>
+      <span class="skill-tag hl-coral">Elastic SIEM</span>
+      <span class="skill-tag">Tableau</span>
+      <span class="skill-tag hl-cyan">Power BI</span>
+      <span class="skill-tag">Azure</span>
+      <span class="skill-tag hl-coral">Log Analysis</span>
+      <span class="skill-tag">Snowflake</span>
+      <span class="skill-tag">AWS</span>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <span class="section-label">Experience</span>
+  <h2 class="section-title">Operational History.</h2>
+  
+  <div class="log-container">
+    <div class="log-entry">
+      <div class="log-header">
+        <div>
+          <h3>Junior Associate | SIEM Monitoring & Data Specialist </h3>
+          <span class="log-company">Atos India Pvt. Limited</span>
+        </div>
+        <span class="log-date">Mar 2022 – Sep 2023</span>
+      </div>
+      <ul>
+        <p>In this Position, I operate at the <strong>intersection of security and intelligence,</strong> leveraging <strong> analytics </strong>to safeguard organizational infrastructure. My focus is on transforming <strong>raw security logs </strong>into <strong> actionable insights </strong>to <strong>preemptively identify and mitigate threats.</strong></p>
+
+        <li><strong>Security Intelligence: </strong>Monitored and analyzed real-time data streams using <strong> SIEM tools </strong>to <strong> detect anomalies</strong> and potential security breaches, ensuring <strong>24/7 infrastructure integrity</strong>.
+</li>
+        <li><strong> Data-Driven Detection: </strong>Utilized <strong>Python and SQL </strong>to query complex datasets, <strong>automating the identification </strong>of high-risk patterns and <strong>reducing manual monitoring overhead.</strong>
+</li>
+        <li>Implemented <strong>data replication and reporting</strong>, reducing operational costs by 20%.</li>
+        <li><strong>Reporting & Visualization: </strong>Designed intuitive security reports and dashboards using <strong>Tableau,</strong> translating <strong>technical security metrics</strong> into <strong>clear narratives</strong> for stakeholders and management.</li>
+        <li><Strong>Cloud Security Analytics: </Strong>Managed <strong>security telemetry</strong> within <strong>Microsoft Azure,</strong> configuring <strong>alerts and dashboards</strong> that provide a high-level view of the organizati0on’s <strong> landscape.</strong>
+</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="log-entry sec">
+      <div class="log-header">
+        <div>
+          <h3>Data Analyst Intern </h3>
+          <span class="log-company" style="color: var(--coral);">Covance</span>
+        </div>
+        <span class="log-date">Jan 2020 – Jul 2020</span>
+      </div>
+      <ul>
+        <p>In this position, I focused on the <strong>intersection of data integrity and healthcare analytics.</strong> I was responsible for ensuring that complex datasets were not only accurate but also translated into <strong>meaningful business intelligence.
+</strong></p>
+        <li><strong>Data Validation & Integrity:</strong> Managed <strong>large-scale healthcare datasets,</strong> performing <strong>rigorous validation </strong>to ensure <strong>high data quality</strong> for clinical reporting.</li>
+        <li><strong> BI Dashboard Development: Conceptualized and developed a Healthcare BI Dashboard that streamlined the visualization </strong>of key performance indicators, improving <strong>data accessibility </strong>for the team.</li>
+        <li><strong>Process Automation:</strong> Leveraged <strong>Python and advanced Excel </strong>functions to <strong>automate repetitive tasks, </strong> significantly <strong>reducing manual errors </strong>and saving weekly processing time.</li>
+        <li><strong> Regulatory Awareness:</strong> Operated within a <strong>highly regulated environment,</strong> gaining foundational experience in <strong>data privacy </strong>and <strong>secure data handling.</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <span class="section-label">Featured Projects</span>
+  <h2 class="section-title">Projects.</h2>
+  
+  <div class="projects-grid">
+  
+
+    <a href="https://github.com/Shakthi003-Naik/SIEM-Home-Setup" target="_blank" class="project-card">
+      <div class="project-visual visual-siem"></div>
+      <div class="project-info">
+        <h3>SIEM Home Lab</h3>
+        <p>A hands-on Elastic SIEM environment to generate, ingest, and analyze security events simulating real-world threat detection.</p>
+        <div class="tech-stack" style="--cyan: var(--coral);">
+          <span>Elastic SIEM</span><span>Security</span><span>Log Analysis</span>
+        </div>
+        <span class="project-link-indicator" style="color: var(--coral);">Execute →</span>
+      </div>
+    </a>
+
+    <a href="https://github.com/Shakthi003-Naik/Insight-Healthcare-Sector" target="_blank" class="project-card">
+      <div class="project-visual visual-bi"></div>
+      <div class="project-info">
+        <h3>Healthcare BI Dashboard</h3>
+        <p>Comprehensive analytics platform surfacing insights into patient care quality and operational efficiency from clinical datasets.</p>
+        <div class="tech-stack">
+          <span>Power BI</span><span>DAX</span><span>SQL</span>
+        </div>
+        <span class="project-link-indicator">Execute →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <span class="section-label" style="margin-bottom: 2rem;">Get In Touch</span>
+  <h2 class="contact-title">Ready to build
+something great.</h2>
+  
+  <div class="contact-links">
+    <a href="mailto:shakthikumar.official@gmail.com" class="terminal-link">shakthikumar.official@gmail.com</a>
+    <a href="https://www.linkedin.com/in/shakthikumarnaik/" target="_blank" class="terminal-link">linkedin.com/in/shakthikumarnaik</a>
+    <!--<a href="https://github.com/Shakthi003-Naik" target="_blank" class="terminal-link hl-coral">github.com/Shakthi003-Naik</a> -->
+  </div>
+</section>
+
+<footer>
+  <p>© <span id="Year"></span> Shakthi Kumar Naik. All rights reserved.</p>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  function closeMenu() {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+    document.body.style.overflow = '';
+  }
+
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
+</body>
+</html>
