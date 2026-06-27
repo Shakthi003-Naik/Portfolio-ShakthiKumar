@@ -791,7 +791,7 @@ footer a:hover{color:var(--blue)}
       </a>
 
       <!-- Pipeline -->
-      <a href="https://github.com/Shakthi003-Naik" target="_blank" rel="noopener" class="proj-card violet-accent reveal">
+      <a href="https://github.com/Shakthi003-Naik/Python_SQL_Pipline" target="_blank" rel="noopener" class="proj-card violet-accent reveal">
         <div class="proj-thumb thumb-pipe">
           <div class="proj-icon-wrap">
             <span class="big-icon" style="color:var(--violet)">⚙️</span>
@@ -800,10 +800,14 @@ footer a:hover{color:var(--blue)}
         </div>
         <div class="proj-body">
           <h3 class="proj-title">Python & SQL Data Pipeline</h3>
-          <p class="proj-desc">Automated ETL pipeline extracting data from REST APIs, transforming via Pandas, loading into SQL — with scheduled runs and anomaly detection alerts built in. Eliminates recurring manual effort entirely.</p>
-          <div class="proj-metrics">
+          <p class="proj-desc">Production-style ETL pipeline fetching live stock market
+data from Alpha Vantage API, cleaning and storing it in MySQL, then running
+dual Z-score + IQR anomaly detection to trigger price alerts automatically
+every 15 minutes.</p>
+           <div class="proj-metrics">
             <div class="p-metric"><strong>~6hrs</strong>Saved weekly</div>
             <div class="p-metric"><strong>100%</strong>Automated</div>
+              <div class="p-metric"><strong>20+</strong>Unit tests</div>
           </div>
           <div class="proj-stack">
             <span>Python</span><span>Pandas</span><span>SQL</span><span>REST API</span>
